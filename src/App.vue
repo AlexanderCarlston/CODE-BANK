@@ -6,15 +6,7 @@
       app
     >
       <v-list dense>
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>John Leider</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile>
+        <v-list-tile @click="closeDrawer" :to='{name: "LandingPage"}'>
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -22,7 +14,7 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile @click="closeDrawer" :to='{name: "Bank"}'> 
           <v-list-tile-action>
             <v-icon>account_balance</v-icon>
           </v-list-tile-action>
@@ -30,9 +22,9 @@
             <v-list-tile-title>Your Bank</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile @click="closeDrawer" :to='{name: "Vaults"}'>
           <v-list-tile-action>
-            <v-icon>reorder</v-icon>
+            <v-icon>work</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Your Vaults</v-list-tile-title>
@@ -43,11 +35,13 @@
     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>CODE BANK</v-toolbar-title>
+      <v-layout class="justify-end">
       <v-toolbar-title v-if="loggedIn">Signed in</v-toolbar-title>
       <v-btn v-else @click="test" large href="https://github.com/login/oauth/authorize?client_id=8152cb35e38e71e9bbf3">
         Sign in
         <i class="devicon-github-plain"></i>
       </v-btn>
+      </v-layout>
     </v-toolbar>
     <v-content>
       <router-view :logIn="logIn" ></router-view>
@@ -74,6 +68,9 @@ export default {
     }
   },
   methods: {
+    closeDrawer(){
+      this.drawer = false
+    },
     test(){
       document.cookie = "loggedIn=true"
     },
@@ -117,5 +114,10 @@ export default {
 </script>
 
 <style>
-
+@import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css);
+@import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css);
+@import url('https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy');
+h1 {
+  font-family: 'Sorts Mill Goudy', serif!important;
+}
 </style>

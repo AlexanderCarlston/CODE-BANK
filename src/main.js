@@ -15,8 +15,8 @@ Vue.use(Vuex)
 
 Vue.use(Vuetify, {
   theme: {
-    primary: 'black',
-    secondary: 'white',
+    primary: '#000000',
+    secondary: '#FFFFFF',
     accent: '#8c9eff',
     error: '#b71c1c'
   }

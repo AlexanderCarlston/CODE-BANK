@@ -1,6 +1,6 @@
 <template>
     <v-layout align-center justify-center>
-        <v-flex xs12 md8>
+        <v-flex xs12 md10>
             <v-card class="elevation-12">
                 <v-toolbar dark color="primary">
                 <v-toolbar-title>Login form</v-toolbar-title>
@@ -8,14 +8,20 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                    <!-- <v-checkbox :label="`Checkbox 1: ${checkbox1.toString()}`" v-model="checkbox1"></v-checkbox> -->
+                    <v-checkbox 
+                    v-for="(code, index) in gists"
+                    :key="code.id"
+                    :v-model="index"
+                    :label="code.files[Object.keys(code.files)[0]].filename"
+                    @click="addBankGist(code, code.id)"
+                    ></v-checkbox>
+                    <h1>Your bank:</h1>
                     <vue-embed-gist 
-                    v-for="code in gists" 
+                    v-for="code in bank_gists" 
                     :key="code.id"
                     :gist-id="code.id"
                     :file="code.files[Object.keys(code.files)[0]].filename"
                     />
-                        
                 </v-form> 
               </v-card-text>
               <v-card-actions>
@@ -62,16 +68,29 @@ export default {
     },
     data () {
       return {
-        checkbox1: true,
-        checkbox2: true,
-        checkbox3: true,
-        checkbox4: false,
+        checkbox: [],
         user_token: '',
         username: '',
-        gists: []
+        gists: [],
+        bank_gists: []
       }
     },
     methods: {
+        addBankGist(obj, id){
+            if(!this.bank_gists.filter(obj => obj.id === id)[0]){
+            this.bank_gists.push(obj)
+            } else {
+                for(var i = 0; i < this.bank_gists.length; i++){
+                    var index = 0
+                    if(this.bank_gists[i].id === id){
+                    this.bank_gists.splice(i,1)
+                        return index
+                    }
+                    return index
+                }
+                this.bank_gists.splice(index,1)
+            }
+        },
     postUser(){
         fetch("http://localhost:3000/users", {
           method: "POST",
@@ -80,7 +99,10 @@ export default {
     }),
     body: JSON.stringify({
       github_token: this.user_token,
-      github_name : this.username
+      github_name : this.username,
+      user_code_snippets: {
+          data: this.bank_gists
+      }
     })
   })
   .then(function(response){
@@ -88,9 +110,9 @@ export default {
   })
   .then(function(data){
     document.cookie = `userId=${data.userItem.id}`
-    console.log(data)
   })
-  this.$router.push({ name: 'Bank', params: { user_id: this.user_id }})
+//   this.$router.push({ name: 'Bank', params: { userId: this.userId}})
+  this.$router.push({ name: 'Bank'})
     },
     getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -120,5 +142,13 @@ export default {
 }
 </script>
 <style>
+/* @import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css);
+@import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css); */
+/* .div-style[data-v-59f78dee]{
+    width:50%;
+    -ms-flex-item-align:center;align-self:center;
+    -ms-flex-line-pack:center;align-content:center;
+    text-align:center;margin:0 auto
+    } */
 
 </style>
