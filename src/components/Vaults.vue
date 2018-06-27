@@ -3,15 +3,15 @@
                 <v-form v-if="inspectingForm">
                     <h1>Your Vault:</h1>
                     <vue-embed-gist 
-                    v-for="snippets in currentVault.vault_code_snippets.data" 
-                    :key="snippets"
+                    v-for="(snippets, index) in currentVault.vault_code_snippets.data" 
+                    :key="index"
                     :gist-id="snippets.id"
                     :file="snippets.files[Object.keys(snippets.files)[0]].filename"
                     />
                 </v-form> 
         <v-layout column>
             <h1>Vaults</h1>
-            <v-btn @click="changeCurrentVault(vault)" v-for="vault in vaults" :key="vault" large>{{vault.vault_name}}</v-btn>
+            <v-btn @click="changeCurrentVault(vault)" v-for="(vault, index) in vaults" :key="index" large>{{vault.vault_name}}</v-btn>
         </v-layout>
     </v-container>
 </template>
@@ -30,16 +30,24 @@ export default {
     VueEmbedGist
   },
     mounted(){
+         if(this.getCookie("loggedIn") === ''){
+            this.$router.push({name: 'LandingPage'})
+        } else {
         var id = this.getCookie('userId')
-        fetch(`http://localhost:3000/users/${id}/vaults`)
+        fetch(`https://secret-island-17002.herokuapp.com/users/${id}/vaults`)
         .then(response => response.json())
         .then(data => this.vaults = data.vaults)
+        }
     },
     methods: {
         changeCurrentVault(obj){
-            this.currentVault = {}
+            if(obj === this.currentVault){
+                this.currentVault = {}
+                this.inspectingForm = false
+            } else {
             this.currentVault = obj
             this.inspectingForm = true
+            }
         },
             getCookie(cname) {
     var name = cname + "=";

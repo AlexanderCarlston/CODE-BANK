@@ -1,6 +1,7 @@
 <template>
     <v-container>
         <Form v-if="logIn"/>
+        <v-layout column v-else>
         <v-layout>
             <div id="cssSelector">      
             <div class="line">
@@ -20,6 +21,7 @@
                 <v-layout justify-center>
             <v-icon size="200" color="primary">account_balance</v-icon>
             <h2>Allowing a clean centralized place for reusable, easily accesible code.</h2>
+        </v-layout>
         </v-layout>
     </v-container>
 </template>

@@ -35,16 +35,22 @@
     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>CODE BANK</v-toolbar-title>
-      <v-layout class="justify-end">
-      <v-toolbar-title v-if="loggedIn">Signed in</v-toolbar-title>
-      <v-btn v-else @click="test" large href="https://github.com/login/oauth/authorize?client_id=8152cb35e38e71e9bbf3">
+      <v-layout class="justify-center">
+      <v-layout class="justify-end" v-if="loggedIn">
+        <v-btn @click="test" large>
+        Import
+        <i class="devicon-github-plain"></i>
+      </v-btn>
+      <v-toolbar-title>Signed in</v-toolbar-title>
+      </v-layout>
+      <v-btn v-else large href="https://github.com/login/oauth/authorize?client_id=8152cb35e38e71e9bbf3">
         Sign in
         <i class="devicon-github-plain"></i>
       </v-btn>
       </v-layout>
     </v-toolbar>
     <v-content>
-      <router-view :logIn="logIn" ></router-view>
+      <router-view :closeForm="closeForm" :logIn="logIn" ></router-view>
     </v-content>
   </v-app>
 </template>
@@ -53,11 +59,14 @@
 export default {
   name: 'App',
   mounted(){
-    if((document.cookie.match(/^(?:.*;)?\s*loggedIn\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]){
-      this.loggedIn = true
-      if(!(document.cookie.match(/^(?:.*;)?\s*userId\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]){
+    console.log(this.getCookie("logged_in"))
+    if(this.getCookie("logged_in") == ""){
+      this.logIn = false
+      console.log('true')
+    } else {
       this.logIn = true
-      }
+      // this.logIn = false
+      console.log('false')
     }
   },
   data(){
@@ -68,10 +77,17 @@ export default {
     }
   },
   methods: {
+    signIn(){
+      this.loggedIn = true
+    },
+    closeForm(){
+      this.logIn = false
+    },
     closeDrawer(){
       this.drawer = false
     },
     test(){
+      this.logIn = true
       document.cookie = "loggedIn=true"
     },
     authenticate: function (provider) {
@@ -79,7 +95,7 @@ export default {
         // Execute application logic after successful social authentication
       })
     },
-     getCookie(name) {
+     getkie(name) {
     var dc = document.cookie;
     var prefix = name + "=";
     var begin = dc.indexOf("; " + prefix);
@@ -96,20 +112,25 @@ export default {
         }
     }
     // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
+    // return unescape(dc.substring(begin + prefix.length, end));
     return decodeURI(dc.substring(begin + prefix.length, end));
     },
-    doSomething() {
-    var myCookie = getCookie("MyCookie");
-
-    if (myCookie == null) {
-        // do cookie doesn't exist stuff;
+      getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
     }
-    else {
-        // do cookie exists stuff
-    }
-}
-  }
+  },
 }
 </script>
 

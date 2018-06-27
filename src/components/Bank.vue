@@ -59,6 +59,7 @@ import VueEmbedGist from 'vue-embed-gist'
 import Loading from '@/components/Loading.vue'
 export default {
     name: 'Bank',
+    props: ["closeForm"],
     components: {
         Loading,
         VueEmbedGist,
@@ -74,19 +75,17 @@ export default {
         }
     },
     mounted(){
+         if(this.getCookie("loggedIn") === ''){
+            this.$router.push({name: 'LandingPage'})
+        } else {
+        this.closeForm()
         var id = this.getCookie('userId')
         this.userId = id
-        var string = window.location.href
-        var regString = string.replace(/\?code\=.{20}#\//gm, '')
-        // if(regString !== string){
-        // window.location.assign(regString)
-        // }
-        // window.location.href = regString
         if(!id){
             this.$router.push({name: "Loading"})
         }
         console.log(id)
-        fetch(`http://localhost:3000/users/${id}`)
+        fetch(`https://secret-island-17002.herokuapp.com/users/${id}`)
         .then(response => {
         return response.json()
         })
@@ -95,7 +94,7 @@ export default {
         this.bank_gists = response.userItem.user_code_snippets.data
         console.log(response)
         })
-    },
+    }},
     methods: {
                 addVaultGist(obj, id){
             if(!this.vault_gists.filter(obj => obj.id === id)[0]){
@@ -116,7 +115,7 @@ export default {
             this.vaultForm = true
         },
         postVault(){
-        fetch("http://localhost:3000/vaults", {
+        fetch("https://secret-island-17002.herokuapp.com/vaults", {
           method: "POST",
           headers: new Headers({
           "content-type": "application/json"
