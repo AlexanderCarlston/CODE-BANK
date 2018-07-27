@@ -1,11 +1,24 @@
 <template>
   <v-app>
     <v-navigation-drawer
+      v-if="loggedIn"
       v-model="drawer"
       fixed
       app
     >
-      <v-list dense>
+      <v-list>
+      <v-toolbar flat class="transparent">
+        <v-list>
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>John Leider</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
         <v-list-tile @click="closeDrawer" :to='{name: "LandingPage"}'>
           <v-list-tile-action>
             <v-icon>home</v-icon>
@@ -33,17 +46,12 @@
       </v-list>
     </v-navigation-drawer>
   <v-toolbar app>
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-    <v-spacer></v-spacer>
-    <v-text-field
-    hide-details
-    prepend-icon="search"
-    single-line
-    ></v-text-field>
+    <v-toolbar-side-icon v-if="loggedIn" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn 
       flat
+      @click="home"
       >Home
       </v-btn>
       <v-btn 
@@ -56,29 +64,86 @@
       v-if="!loggedIn"
       flat
       large
+      @click="authenticate('github')"
       >Sign in
       <i class="devicon-github-plain"></i>
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
-  <router-view :logIn="logIn" ></router-view>
+  <Modal v-if="logIn" :logIn="logIn" :userGists="userGists"/>
+  <router-view></router-view>
   </v-app>
 </template>
 
 <script>
+import Modal from "./components/Modal.vue";
+import store from "./store/store.js";
 export default {
   name: "App",
   mounted() {},
   data() {
     return {
       drawer: false,
-      logIn: false,
-      loggedIn: false,
+      userGists: []
     };
+  },
+  computed: {
+    logIn() {
+      return this.$store.getters.logIn;
+    },
+    loggedIn() {
+      return this.$store.getters.loggedIn;
+    },
+    Auth() {
+      return this.$store.getters.Auth;
+    },
+    User() {
+      return this.$store.getters.User;
+    }
+  },
+  components: {
+    Modal
   },
   methods: {
     closeDrawer() {
       this.drawer = false;
+    },
+    home() {
+      this.$router.push({ name: "LandingPage" });
+    },
+    authenticate(provider) {
+      this.$auth.authenticate(provider).then(data => {
+        // Execute application logic after successful social authentication
+        console.log(data);
+        store.dispatch("changeUser", {
+          property: "access_token",
+          value: data.data.token
+        });
+        fetch(`https://api.github.com/user?access_token=${data.data.token}`)
+          .then(response => response.json())
+          .then(data => {
+            store.dispatch("changeUser", {
+              property: "userName",
+              value: data.login
+            });
+            store.dispatch("changeUser", {
+              property: "avatar_url",
+              value: data.avatar_url
+            });
+          });
+        window.setTimeout(() => {
+          fetch(
+            `https://api.github.com/users/${
+              store.state.user.userName
+            }/gists?access_token=${store.state.user.access_token}`
+          )
+            .then(response => response.json())
+            .then(data => (this.userGists = data));
+          store.dispatch("logIn", {
+            boolean: true
+          });
+        }, 1000);
+      });
     }
   }
 };

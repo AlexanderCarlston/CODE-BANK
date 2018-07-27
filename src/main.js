@@ -24,16 +24,15 @@ Vue.use(Vuetify, {
 
 Vue.use(VueAxios, axios)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://localhost:3000', // Your API domain
-  
+  baseUrl: 'https://secret-island-17002.herokuapp.com', // Your API domain
+  tokenName: 'token',
+  // storageType: 'localStorage',
   providers: {
     github: {
       clientId: '8152cb35e38e71e9bbf3',
-      redirectUri: 'http://localhost:8080/auth/callback' // Your client app URL
+      redirectUri: 'http://localhost:8080'
     }
-  }
-})
-
+  }})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
