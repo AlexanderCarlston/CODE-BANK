@@ -1,69 +1,150 @@
 <template>
-    <v-container>
-        <Form v-if="logIn"/>
-        <v-layout column v-else>
-        <v-layout>
-            <div id="cssSelector">      
-            <div class="line">
-                <div class="square el"></div>
-                <div id="duration">
-                <h1 class="text">CODE BANK</h1>
-                </div>
-                <div class="square el"></div>
+    <v-content>
+      <section>
+        <v-layout
+          column
+          wrap
+          class="my-5"
+          align-center
+        >
+        <img src="static/bank.png" alt="Vuetify.js" height="200">
+        <h1 class="black--text mb-2 display-1 text-xs-center">CODE BANK</h1>
+          <v-flex xs12 sm4 class="my-3">
+            <div class="text-xs-center">
+              <h2 class="headline">Enabling developers, starting with their gists.</h2>
+              <span class="subheading">
+                  With an emphasis on sharable, mantainable, and easily accesible code snippets in your project.
+              </span>
             </div>
-            </div>
+          </v-flex>
+          <v-flex xs12>
+            <v-container grid-list-xl>
+              <v-layout row wrap align-center>
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <v-icon x-large class="black--text">error_outline</v-icon>
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                      <div class="headline">Problem</div>
+                    </v-card-title>
+                    <v-card-text>
+                        The problem is simple, github gists are messy. There is currently no way to
+                        organize your gists, and you eventually keep adding gist after gist until it 
+                        becomes a pain to find the gist you need. You also end up only copying and pasting.
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <v-icon x-large class="black--text">account_balance</v-icon>
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                      <div class="headline">Bank</div>
+                    </v-card-title>
+                    <v-card-text>
+                        Your bank is essentially a better way of organizing, and categorizing your gists.
+                        You are able to have easy access to these gists, and can actually store your gists
+                        however you need to. You are able to have a centralized place to store your gists.
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+
+                <v-flex xs12 md4>
+                  <v-card class="elevation-0 transparent">
+                    <v-card-text class="text-xs-center">
+                      <v-icon x-large class="black--text">work</v-icon>
+                    </v-card-text>
+                    <v-card-title primary-title class="layout justify-center">
+                      <div class="headline text-xs-center">Vaults</div>
+                    </v-card-title>
+                    <v-card-text>
+                        Vaults are a way of exporting gists in to a project, they are a npm package that 
+                        adapts to what you need. They are easy to develop with, and as soon as you are done
+                        developing you can just install it as a dependency.
+                    </v-card-text>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
         </v-layout>
-        <br>
-        <v-layout justify-center>
-            <v-icon size="200" color="primary">code</v-icon>
-            <h2>Enabling developers, starting with their gists.</h2>
-        </v-layout>
-                <v-layout justify-center>
-            <v-icon size="200" color="primary">account_balance</v-icon>
-            <h2>Allowing a clean centralized place for reusable, easily accesible code.</h2>
-        </v-layout>
-        </v-layout>
-    </v-container>
+      </section>
+
+      <section>
+        <v-parallax src="../static/code.jpg" height="380">
+        </v-parallax>
+      </section>
+
+      <section>
+        <v-container grid-list-xl>
+          <v-layout row wrap justify-center class="my-5">
+            <v-flex xs12 sm4>
+              <v-card class="elevation-0 transparent">
+                <v-card-title primary-title class="layout justify-center">
+                  <div class="headline">About me</div>
+                </v-card-title>
+                <v-card-text>
+                    My name is Alexander Carlston, and I am a full stack web developer. I'm a Denver native,
+                    and am extremely excited about coding. Right now coding is a hobby, and making this hobby my
+                    profression is my dream. I've created CODE-BANK, but would love any help from anybody 
+                    (whether it be code or job leads).
+                </v-card-text>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 sm4 offset-sm1>
+              <v-card class="elevation-0 transparent">
+                <v-card-title primary-title class="layout justify-center">
+                  <div class="headline">Contact me</div>
+                </v-card-title>
+                <v-card-text>
+                  Alexander Carlston - Full Stack Web Developer
+                  <br/>
+                  I am currently looking for work!
+                </v-card-text>
+                <v-list class="transparent">
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon class="black--text">phone</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title>720-400-6336</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon class="black--text">place</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title>Denver, US</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon class="black--text">email</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title>alekscarlston@yahoo.com</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </section>
+    </v-content>
 </template>
 <script>
-import anime from 'animejs'
-import Form from '@/components/Form.vue'
 export default {
-    name: 'LandingPage',
-    mounted(){
-        anime({
-  targets: '#cssSelector .el',
-  translateX: 250,
-  duration: 8000
-})
-anime({
-  targets: '#duration .text',
-  translateX: 250,
-  duration: 8000
-});
-    },
-    components: {
-    Form
-  },
-  props: ["logIn"],
-  methods: {
+  name: "LandingPage",
+  mounted() {
+
   }
-}
+};
 </script>
 
 <style>
-
-.square{
-    height: 10px;
-    width: 600px;
-    color: green;
-    background-color: black;
-}
-h1 {
-    font-size: 95px;
-}
-h2 {
-    font-size: 50px;
-    width: 650px;
-}
 </style>

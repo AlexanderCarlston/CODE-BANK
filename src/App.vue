@@ -32,113 +32,63 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>CODE BANK</v-toolbar-title>
-      <v-layout class="justify-center">
-      <v-layout class="justify-end" v-if="loggedIn">
-        <v-btn @click="test" large>
-        Import
-        <i class="devicon-github-plain"></i>
+  <v-toolbar app>
+    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-spacer></v-spacer>
+    <v-text-field
+    hide-details
+    prepend-icon="search"
+    single-line
+    ></v-text-field>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-btn 
+      flat
+      >Home
       </v-btn>
-      <v-toolbar-title>Signed in</v-toolbar-title>
-      </v-layout>
-      <v-btn v-else large href="https://github.com/login/oauth/authorize?client_id=8152cb35e38e71e9bbf3">
-        Sign in
-        <i class="devicon-github-plain"></i>
+      <v-btn 
+      flat
+      href="https://github.com/AlexanderCarlston/CODE-BANK"
+      target="_blank"
+      >Github
       </v-btn>
-      </v-layout>
-    </v-toolbar>
-    <v-content>
-      <router-view :closeForm="closeForm" :logIn="logIn" ></router-view>
-    </v-content>
+      <v-btn 
+      v-if="!loggedIn"
+      flat
+      large
+      >Sign in
+      <i class="devicon-github-plain"></i>
+      </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+  <router-view :logIn="logIn" ></router-view>
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  mounted(){
-    console.log(this.getCookie("logged_in"))
-    if(this.getCookie("logged_in") == ""){
-      this.logIn = false
-      console.log('true')
-    } else {
-      this.logIn = true
-      // this.logIn = false
-      console.log('false')
-    }
-  },
-  data(){
+  name: "App",
+  mounted() {},
+  data() {
     return {
       drawer: false,
+      logIn: false,
       loggedIn: false,
-      logIn: false
-    }
+    };
   },
   methods: {
-    signIn(){
-      this.loggedIn = true
-    },
-    closeForm(){
-      this.logIn = false
-    },
-    closeDrawer(){
-      this.drawer = false
-    },
-    test(){
-      this.logIn = true
-      document.cookie = "loggedIn=true"
-    },
-    authenticate: function (provider) {
-      this.$auth.authenticate(provider).then(function () {
-        // Execute application logic after successful social authentication
-      })
-    },
-     getkie(name) {
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = dc.indexOf(prefix);
-        if (begin != 0) return null;
+    closeDrawer() {
+      this.drawer = false;
     }
-    else
-    {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = dc.length;
-        }
-    }
-    // because unescape has been deprecated, replaced with decodeURI
-    // return unescape(dc.substring(begin + prefix.length, end));
-    return decodeURI(dc.substring(begin + prefix.length, end));
-    },
-      getCookie(cname) {
-      var name = cname + "=";
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var ca = decodedCookie.split(";");
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == " ") {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
-    }
-  },
-}
+  }
+};
 </script>
 
 <style>
 @import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css);
 @import url(https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css);
-@import url('https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy');
+@import url("https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy");
 h1 {
-  font-family: 'Sorts Mill Goudy', serif!important;
+  font-family: "Sorts Mill Goudy", serif !important;
 }
 </style>
