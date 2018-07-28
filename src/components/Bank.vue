@@ -1,12 +1,21 @@
 <template>
-  <v-content>
+  <v-content >
     <v-container>
-      <v-layout column justify-center>
-      <v-card  class="elevation-0 transparent">
-        <img src="https://randomuser.me/api/portraits/men/85.jpg">
-        <span class="display-4">Your Bank</span>
-      </v-card>
-      </v-layout>
+        <v-layout>
+          <section>
+          <v-layout>
+          <img :src="User.avatar_url" height="200">
+          <v-card>
+            <v-layout column>
+            <v-btn>IMPORT</v-btn>
+            <v-btn>CREATE TAG</v-btn>
+            <v-btn>DELETE TAG</v-btn>
+            <v-btn></v-btn>
+            </v-layout>
+          </v-card>
+          </v-layout>
+          </section>
+        </v-layout>
     </v-container>
   </v-content>
 </template>
@@ -32,7 +41,9 @@ export default {
     };
   },
   mounted() {
-    fetch(`https://secret-island-17002.herokuapp.com/users/${store.state.user.id}`)
+    fetch(
+      `https://secret-island-17002.herokuapp.com/users/${store.state.user.id}`
+    )
       .then(response => {
         return response.json();
       })
@@ -41,6 +52,11 @@ export default {
         this.bank_gists = response.userItem.user_code_snippets.data;
         console.log(response);
       });
+  },
+  computed: {
+    User() {
+      return this.$store.getters.User;
+    }
   },
   methods: {
     addVaultGist(obj, id) {
