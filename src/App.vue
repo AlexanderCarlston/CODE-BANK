@@ -63,11 +63,18 @@
   import store from "./store/store.js";
   export default {
     name: "App",
-    mounted() {},
+    mounted() {
+      fetch("https://secret-island-17002.herokuapp.com/users")
+        .then(response => response.json())
+        .then(data => {
+          this.users = data.users
+        })
+    },
     data() {
       return {
         drawer: false,
-        userGists: []
+        userGists: [],
+        users: []
       };
     },
     computed: {
@@ -117,16 +124,28 @@
               });
             });
           window.setTimeout(() => {
-            fetch(
-                `https://api.github.com/users/${
-                store.state.user.userName
-              }/gists?access_token=${store.state.user.access_token}`
-              )
+            fetch(`https://api.github.com/users/${store.state.user.userName}/gists?access_token=${store.state.user.access_token}`)
               .then(response => response.json())
               .then(data => (this.userGists = data));
-            store.dispatch("logIn", {
-              boolean: true
-            });
+            if (this.users.filter(user => user.github_name === store.state.user.userName).length === 0) {
+              store.dispatch("logIn", {
+                boolean: true
+              })
+            } else {
+              var array = this.users.filter(user => user.github_name === store.state.user.userName)
+              console.log(array, "hi")
+              store.dispatch("loggedIn", {
+                boolean: true
+              });
+              store.dispatch("isAuthenticated");
+              store.dispatch("changeUser", {
+                property: "id",
+                value: array[0].id
+              });
+              // this.$router.push({
+              //   name: "Bank"
+              // });
+            }
           }, 1000);
         });
       }
