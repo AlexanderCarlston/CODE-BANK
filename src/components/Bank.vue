@@ -7,9 +7,9 @@
             <img :src="User.avatar_url" height="200">
             <v-card>
               <v-layout column>
-                <v-btn>IMPORT</v-btn>
                 <v-btn @click="createTag">CREATE TAG</v-btn>
                 <v-btn @click="deleteTag">DELETE TAG</v-btn>
+                <v-btn>USE TAG</v-btn>
                 <v-btn>UPDATE</v-btn>
               </v-layout>
             </v-card>
@@ -42,11 +42,12 @@
             </v-form>
             <v-flex v-if="tagDelete">
             <v-select
+            v-model="tagDeleteData"
             :items="items"
             label="test"
             >
             </v-select>
-            <v-btn></v-btn>
+            <v-btn @click="submitDeleteTag">Delete</v-btn>
             </v-flex>
           </v-flex>
         </section>
@@ -108,7 +109,8 @@
           v => v.length <= 10 || 'Name must be less than 10 characters'
         ],
         tagCreate: false,
-        tagDelete: false
+        tagDelete: false,
+        tagDeleteData: ""
       };
     },
     mounted() {
@@ -130,6 +132,10 @@
       }
     },
     methods: {
+      submitDeleteTag(){
+        this.items = this.items.filter(item => item !== this.tagDeleteData)
+        this.tagDelete = false
+      },
       deleteTag(){
         this.tagDelete = true
       },
