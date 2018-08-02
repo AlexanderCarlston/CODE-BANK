@@ -7,10 +7,10 @@
             <img :src="User.avatar_url" height="200">
             <v-card>
               <v-layout column>
-                <v-btn @click="createTag">CREATE TAG</v-btn>
-                <v-btn @click="deleteTag">DELETE TAG</v-btn>
-                <v-btn>USE TAG</v-btn>
+                <v-btn>IMPORT</v-btn>
                 <v-btn>UPDATE</v-btn>
+                <v-btn></v-btn>
+                <v-btn></v-btn>
               </v-layout>
             </v-card>
           </v-layout>
@@ -24,11 +24,18 @@
               <span class="display-2">N</span>
               <span class="display-2">K</span>
             </v-layout>
+            <v-layout column>
+
+            </v-layout>
           </v-layout>
         </section>
         <v-spacer></v-spacer>
         <section>
           <v-flex xl6>
+              <v-btn @click="createTag">CREATE TAG</v-btn>
+              <v-btn @click="deleteTag">DELETE TAG</v-btn>
+              <v-btn @click="useTag">USE TAG</v-btn>
+              <v-btn>Remove Tag</v-btn>
             <v-form v-if="tagCreate">
               <v-text-field
               v-model="tag"
@@ -40,14 +47,32 @@
               </v-text-field>
               <v-btn @click="submitTag">Submit</v-btn>
             </v-form>
+
             <v-flex v-if="tagDelete">
             <v-select
             v-model="tagDeleteData"
             :items="items"
-            label="test"
+            label="tags"
             >
             </v-select>
             <v-btn @click="submitDeleteTag">Delete</v-btn>
+            </v-flex>
+
+            <v-flex v-if="tagUse">
+            <v-select
+            v-model="tagDeleteData"
+            :items="items"
+            label="tags"
+            >
+            </v-select>   
+            <v-checkbox 
+            v-for="(code, index) in bank_gists"
+            :key="code.id+index"
+            :v-model="index"
+            :label="code.files[Object.keys(code.files)[0]].filename"
+            @change="addBankGist(code, code.id)"
+            ></v-checkbox>
+            <v-btn></v-btn>
             </v-flex>
           </v-flex>
         </section>
@@ -110,10 +135,12 @@
         ],
         tagCreate: false,
         tagDelete: false,
-        tagDeleteData: ""
+        tagDeleteData: "",
+        tagUse: false
       };
     },
     mounted() {
+      if(this.User.bank_gists.length === 0){
       fetch(
           `https://secret-island-17002.herokuapp.com/users/${store.state.user.id}`
         )
@@ -122,9 +149,15 @@
         })
         .then(response => {
           console.log(response.userItem.user_code_snippets.data);
-          this.bank_gists = response.userItem.user_code_snippets.data;
-          console.log(response);
+          this.bank_gists = response.userItem.user_code_snippets.data
+          store.dispatch("changeUser", {
+            property: "bank_gists" ,
+            value: response.userItem.user_code_snippets.data
+          })
         });
+      } else {
+        this.bank_gists = this.User.bank_gists
+      }
     },
     computed: {
       User() {
@@ -132,12 +165,26 @@
       }
     },
     methods: {
+      useTag(){
+        if(this.tagUse){
+          this.tagUse = false
+        } else {
+          this.tagUse = true
+        }
+      },
+      addBankGist(){
+
+      },
       submitDeleteTag(){
         this.items = this.items.filter(item => item !== this.tagDeleteData)
         this.tagDelete = false
       },
       deleteTag(){
-        this.tagDelete = true
+        if(this.tagDelete){
+          this.tagDelete = false
+        } else {
+          this.tagDelete = true
+        }
       },
       submitTag(){
         this.tagCreate = false
@@ -146,7 +193,11 @@
         this.tag = ""
       },
       createTag(){
-      this.tagCreate = true
+        if(this.tagCreate){
+          this.tagCreate = false
+        } else {
+          this.tagCreate = true
+        }
       },
       addVaultGist(obj, id) {
         if (!this.vault_gists.filter(obj => obj.id === id)[0]) {
