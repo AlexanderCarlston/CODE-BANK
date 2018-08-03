@@ -20,7 +20,8 @@ export default new Vuex.Store({
       userName: '',
       access_token: '',
       avatar_url: '',
-      bank_gists: []
+      bank_gists: [],
+      tags: []
     }
   },
 

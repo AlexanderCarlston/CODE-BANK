@@ -53,7 +53,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <Modal v-if="logIn" :logIn="logIn" :userGists="userGists" />
+    <Modal v-if="logIn" :logIn="logIn" :userGists="userGists" :boolean="true"/>
     <router-view></router-view>
   </v-app>
 </template>

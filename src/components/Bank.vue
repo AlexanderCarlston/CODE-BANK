@@ -1,16 +1,17 @@
 <template>
   <v-content>
     <v-container>
+      <Modal :logIn="logIn" :boolean="false" :tags="items" :closeLogIn="closeLogIn"/>
       <v-layout row wrap>
         <section>
           <v-layout>
             <img :src="User.avatar_url" height="200">
             <v-card>
               <v-layout column>
-                <v-btn>IMPORT</v-btn>
+                <v-btn @click="importButton">IMPORT</v-btn>                
+                <v-btn>SYNC</v-btn>                
+                <v-btn disabled>FUTURE</v-btn>
                 <v-btn>UPDATE</v-btn>
-                <v-btn></v-btn>
-                <v-btn></v-btn>
               </v-layout>
             </v-card>
           </v-layout>
@@ -133,6 +134,7 @@
 </template>
 
 <script>
+  import Modal from "./Modal.vue";
   import VueEmbedGist from "vue-embed-gist";
   import Loading from "@/components/Loading.vue";
   import store from "../store/store.js";
@@ -141,7 +143,8 @@
     props: ["closeForm"],
     components: {
       Loading,
-      VueEmbedGist
+      VueEmbedGist,
+      Modal
     },
     data() {
       return {
@@ -155,6 +158,7 @@
         vault_name: "",
         chips: [],
         items: [],
+        logIn: false,
         tag: '',
         tagRules: [
           v => !!v || 'Name is required',
@@ -194,11 +198,15 @@
     computed: {
       User() {
         return this.$store.getters.User;
-      }
+      },
     },
     methods: {
-      filterGist(){
-
+      importButton(){
+        this.logIn = true
+      },
+      closeLogIn(){
+        this.logIn = false
+        this.bank_gists = this.User.bank_gists
       },
       filterBankGists(){
         if(this.chips.length === 0){
@@ -361,7 +369,4 @@
 </script>
 
 <style>
-  h1 {
-    font-size: 90px;
-  }
 </style>
