@@ -47,9 +47,6 @@
         <v-btn flat @click="home">Home
         </v-btn>
         <v-btn flat disabled>
-          About     
-        </v-btn>
-        <v-btn flat disabled>
           HOW TO
         </v-btn>
         <v-btn flat href="https://github.com/AlexanderCarlston/CODE-BANK" target="_blank">Github
