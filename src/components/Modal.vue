@@ -3,9 +3,10 @@
     <v-dialog v-model="logIn" persistent max-width="1000px">
       <v-card>
         <v-card-title>
-          <span class="headline">{{User.userName}}'s gists. Choose what you want to import.</span>
+          <span class="headline">{{User.userName}}'s gists. Choose what you want to import.</span>          
         </v-card-title>
         <v-card-title v-if="boolean">
+          <span v-if="this.userGists.length === 0" class="display-3">You have no public gists</span>
             <v-checkbox 
             v-for="(code, index) in userGists"
             :key="code.id+index"
