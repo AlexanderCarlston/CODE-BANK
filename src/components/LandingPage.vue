@@ -79,6 +79,14 @@
                 My name is Alexander Carlston, and I am a full stack web developer. I'm a Denver native, and am extremely excited about coding. Right now coding is a hobby, and making this hobby my profression is my dream. I've created CODE-BANK, but would love any help
                 from anybody (whether it be code or job leads).
               </v-card-text>
+              <v-card-title primary-title class="layout justify-center">
+                <div class="headline">This is a demo.</div>              
+              </v-card-title>
+              <v-card-text>
+                I have high standards for myself, and want this product to be good.
+                This website is currently a proof of concept, and I'm constantly working on it.
+                I'm also trying to find my first developer job, so I have to but aside my love of coding to fill out applications.
+              </v-card-text>
             </v-card>
           </v-flex>
           <v-flex xs12 sm4 offset-sm1>
@@ -120,15 +128,6 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </section>
-
-    <section>
-      <v-layout column text-xs-center>
-        <span class="display-3">This is a demo.</span>
-        <span class="display-1">I have high standards for myself, and want this product to be good.</span>
-        <span class="display-1">This website is currently a proof of concept, and I'm constantly working on it.</span>
-        <span class="display-1">I'm also trying to find my first developer job, so I have to but aside my love of coding to fill out applications.</span>
-      </v-layout>
     </section>
   </v-content>
 </template>
