@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage.vue'
 import Bank from '@/components/Bank.vue'
 import Vaults from '@/components/Vaults.vue'
+import HowTo from '@/components/HowTo.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +22,11 @@ export default new Router({
       path: '/vaults',
       name: 'Vaults',
       component: Vaults
+    },
+    {
+      path: '/howTo',
+      name: "HowTo",
+      component: HowTo
     }
   ]
 })
