@@ -105,7 +105,11 @@ export default {
         })
         })
       .then(response => response.json())
-      .then(data)
+      .then(data => {
+        if (data.error) {
+          console.log("error")
+        }
+      })
       .catch(error => console.error(error))
       store.dispatch("changeUser", {
         property: "bank_gists",
