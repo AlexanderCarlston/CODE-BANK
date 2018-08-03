@@ -106,13 +106,11 @@
 <script>
   import Modal from "./Modal.vue";
   import VueEmbedGist from "vue-embed-gist";
-  import Loading from "@/components/Loading.vue";
   import store from "../store/store.js";
   export default {
     name: "Bank",
     props: ["closeForm"],
     components: {
-      Loading,
       VueEmbedGist,
       Modal
     },
