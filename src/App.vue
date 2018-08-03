@@ -112,7 +112,6 @@
       authenticate(provider) {
         this.$auth.authenticate(provider).then(data => {
           // Execute application logic after successful social authentication
-          console.log(data);
           store.dispatch("changeUser", {
             property: "access_token",
             value: data.data.token
@@ -139,7 +138,6 @@
               })
             } else {
               var array = this.users.filter(user => user.github_name === store.state.user.userName)
-              console.log(array, "hi")
               store.dispatch("loggedIn", {
                 boolean: true
               });

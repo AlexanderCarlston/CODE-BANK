@@ -159,7 +159,6 @@
             return response.json();
           })
           .then(response => {
-            console.log(response.userItem.user_code_snippets.data);
             this.bank_gists = response.userItem.user_code_snippets.data
             store.dispatch("changeUser", {
               property: "bank_gists",
@@ -262,7 +261,6 @@
         } else {
           this.tagUseArray = this.tagUseArray.filter(item => item.id !== id)
         }
-        console.log(this.tagUseArray)
       },
       submitDeleteTag() {
         this.items = this.items.filter(item => item !== this.tagDeleteData)

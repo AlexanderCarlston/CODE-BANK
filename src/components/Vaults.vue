@@ -236,7 +236,6 @@
         } else {
           this.tagUseArray = this.tagUseArray.filter(item => item.id !== id)
         }
-        console.log(this.tagUseArray)
       },
       submitDeleteTag() {
         this.items = this.items.filter(item => item !== this.tagDeleteData)
