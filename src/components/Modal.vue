@@ -87,7 +87,6 @@ export default {
       if (this.updateBank.filter(gist => gist.id === id).length === 0) {
         this.updateBank.push(code)
       } else {
-        console.log('false')
         this.updateBank = this.updateBank.filter(gist => gist.id !== id)
       }
     },
@@ -106,7 +105,7 @@ export default {
         })
         })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data)
       .catch(error => console.error(error))
       store.dispatch("changeUser", {
         property: "bank_gists",
@@ -116,12 +115,10 @@ export default {
     },
     addBankGist(object, id) {
       if (!this.$store.getters.Check(id)[0]) {
-        console.log("true");
         store.dispatch("AddGist", {
           object: object
         });
       } else {
-        console.log("false");
         store.dispatch("RemoveGist", {
           id: object.id
         });
@@ -151,7 +148,6 @@ export default {
           return response.json();
         })
         .then(function(data) {
-          console.log(data);
           store.dispatch("changeUser", {
             property: "id",
             value: data.userItem.id
