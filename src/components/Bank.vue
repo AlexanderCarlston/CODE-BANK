@@ -35,7 +35,7 @@
               <v-btn @click="createTag">CREATE TAG</v-btn>
               <v-btn @click="deleteTag">DELETE TAG</v-btn>
               <v-btn @click="useTag">USE TAG</v-btn>
-              <v-btn>Remove Tag</v-btn>
+              <v-btn @click="tagRemove">Remove Tag</v-btn>
             <v-form v-if="tagCreate">
               <v-text-field
               v-model="tag"
@@ -60,7 +60,7 @@
 
             <v-flex v-if="tagUse">
             <v-select
-            v-model="tagDeleteData"
+            v-model="tagUseData"
             :items="items"
             label="tags"
             >
@@ -72,7 +72,24 @@
             :label="code.files[Object.keys(code.files)[0]].filename"
             @change="addBankGist(code, code.id)"
             ></v-checkbox>
-            <v-btn></v-btn>
+            <v-btn @click="submitTagUse">Submit</v-btn>
+            </v-flex>
+
+            <v-flex v-if="removeTag">
+            <v-select
+            v-model="tagUseData"
+            :items="items"
+            label="tags"
+            >
+            </v-select>   
+            <v-checkbox 
+            v-for="(code, index) in bank_gists"
+            :key="code.id+index"
+            :v-model="index"
+            :label="code.files[Object.keys(code.files)[0]].filename"
+            @change="addBankGist(code, code.id)"
+            ></v-checkbox>
+            <v-btn @click="submitRemoveTag">Submit</v-btn>
             </v-flex>
           </v-flex>
         </section>
@@ -92,12 +109,20 @@
                   </v-chip>
             </template>
             </v-combobox>
-            <v-btn block>FILTER</v-btn>
+            <v-btn @click="filterBankGists" block>FILTER</v-btn>
           </section>
         </v-layout>
-        <v-layout row wrap>
+        <v-layout v-if="!filter" row wrap>  
           <vue-embed-gist 
           v-for="code in bank_gists" 
+          :key="code.id"
+          :gist-id="code.id"
+          :file="code.files[Object.keys(code.files)[0]].filename"
+          />
+        </v-layout>
+        <v-layout v-else row wrap>
+          <vue-embed-gist 
+          v-for="code in filtered_gists" 
           :key="code.id"
           :gist-id="code.id"
           :file="code.files[Object.keys(code.files)[0]].filename"
@@ -122,6 +147,8 @@
       return {
         loading: false,
         bank_gists: [],
+        filtered_gists: [],
+        filter: false,
         vault_gists: [],
         userId: 0,
         vaultForm: false,
@@ -136,7 +163,12 @@
         tagCreate: false,
         tagDelete: false,
         tagDeleteData: "",
-        tagUse: false
+        tagUse: false,
+        tagUseData: "",
+        tagUseArray: [],
+        removeTag: false,
+        removeTagData: "",
+        removeTagArray: {}
       };
     },
     mounted() {
@@ -165,6 +197,69 @@
       }
     },
     methods: {
+      filterGist(){
+
+      },
+      filterBankGists(){
+        if(this.chips.length === 0){
+          this.filter = false
+        } else {
+          this.filter = true          
+          var chips = this.chips
+          var gists = this.bank_gists
+          var newArray = []
+          for (let i = 0; i < gists.length; i++) {
+            if(gists[i].tags !== undefined){
+              for (let x = 0; x < gists[i].tags.length; x++) {
+                var counter = 0
+                if(chips.indexOf(gists[i].tags[x]) > -1){
+                  counter += 1
+                }        
+                if(counter === chips.length){
+                  newArray.push(gists[i])
+                }
+              }
+            }
+          }
+          this.filtered_gists = newArray
+        }
+      },
+      submitRemoveTag(){
+        this.tagUseArray.map(item => {
+          item.tags = item.tags.filter(tag => tag !== this.tagUseData)
+        })
+        this.tagUseArray.map(item => {
+          this.bank_gists = this.bank_gists.filter(gist => gist.id !== item.id)
+          this.bank_gists.push(item)
+        })
+        this.tagUseData = ""
+        this.tagUseArray = []
+        this.tagUse = false
+      },
+      tagRemove(){
+        if(this.removeTag){
+          this.removeTag = false
+        } else {
+          this.removeTag = true
+        }
+      },
+      submitTagUse(){
+        this.tagUseArray.map(item => {
+          if(item.tags){
+            item.tags = []
+            item.tags.push(this.tagUseData)
+          } else {
+            item.tags.push(this.tagUseData)
+          }
+        })
+        this.tagUseArray.map(item => {
+          this.bank_gists = this.bank_gists.filter(gist => gist.id !== item.id)
+          this.bank_gists.push(item)
+        })
+        this.tagUseData = ""
+        this.tagUseArray = []
+        this.tagUse = false
+      },
       useTag(){
         if(this.tagUse){
           this.tagUse = false
@@ -172,8 +267,13 @@
           this.tagUse = true
         }
       },
-      addBankGist(){
-
+      addBankGist(code, id){
+        if(this.tagUseArray.filter(item => item.id === id).length === 0){
+          this.tagUseArray.push(code)
+        } else {
+          this.tagUseArray = this.tagUseArray.filter(item => item.id !== id)
+        }
+        console.log(this.tagUseArray)
       },
       submitDeleteTag(){
         this.items = this.items.filter(item => item !== this.tagDeleteData)

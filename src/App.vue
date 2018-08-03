@@ -48,7 +48,7 @@
         </v-btn>
         <v-btn flat href="https://github.com/AlexanderCarlston/CODE-BANK" target="_blank">Github
         </v-btn>
-        <v-btn v-if="!loggedIn" flat large @click="authenticate('github')" disabled>Sign in
+        <v-btn v-if="!loggedIn" flat large @click="authenticate('github')">Sign in
           <i class="devicon-github-plain"></i>
         </v-btn>
       </v-toolbar-items>
