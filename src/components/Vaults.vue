@@ -139,7 +139,8 @@
 			}
 		},
 		components: {
-			VueEmbedGist
+			VueEmbedGist,
+			Modal
 		},
 		mounted() {
 			if (this.User.id === undefined) {

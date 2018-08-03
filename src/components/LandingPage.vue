@@ -61,7 +61,7 @@
         </v-flex>
       </v-layout>
     </section>
-  
+
     <section>
       <v-parallax src="../static/code.jpg" height="380">
       </v-parallax>
@@ -120,6 +120,15 @@
           </v-flex>
         </v-layout>
       </v-container>
+    </section>
+
+    <section>
+      <v-layout column text-xs-center>
+        <span class="display-3">This is a demo.</span>
+        <span class="display-1">I have high standards for myself, and want this product to be good.</span>
+        <span class="display-1">This website is currently a proof of concept, and I'm constantly working on it.</span>
+        <span class="display-1">I'm also trying to find my first developer job, so I have to but aside my love of coding to fill out applications.</span>
+      </v-layout>
     </section>
   </v-content>
 </template>
