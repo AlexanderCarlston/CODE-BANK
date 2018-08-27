@@ -19,6 +19,8 @@ This project started as my capstone for Galvanize, an end of program project whe
 Currently I'm planning out my app, I've come to realize planning is the key to success. I'm doing this my creating wireframes, and ERDS. I'm also making sure that the general foundation of this application is expandable, so I can make any changes that I need to.
 * Navbar wireframe:
 ![Navbar](https://imgur.com/haHo7rQ.png)
+* How to page wireframe:
+
 
 ## Built With:
 * [Vue.js](https://vuejs.org/) - Front End Framework

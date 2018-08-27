@@ -1,8 +1,8 @@
 <template>
     <v-content>
-        <section>
+        <v-container>
             
-        </section>
+        </v-container>
     </v-content>
 </template>
 <script>
