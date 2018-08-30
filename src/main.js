@@ -29,7 +29,7 @@ Vue.use(VueAuthenticate, {
   // storageType: 'localStorage',
   providers: {
     github: {
-      clientId: '9d112619aac275d3cd30',
+      clientId: '8152cb35e38e71e9bbf3',
       redirectUri: 'http://localhost:8080'
     }
   }})

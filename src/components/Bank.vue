@@ -1,7 +1,7 @@
 <template>
   <v-content>
-    <v-container>
-      <Modal :logIn="logIn" :boolean="false" :tags="items" :closeLogIn="closeLogIn" />
+    <Modal v-if="logIn" :logIn="logIn" :boolean="false" :tags="items" :closeLogIn="closeLogIn" />
+    <v-container v-else>
       <v-layout row wrap>
         <section>
           <v-layout>
@@ -78,7 +78,7 @@
                     >
                     <strong>{{ data.item }}</strong>&nbsp;
                     </v-chip>
-</template>
+            </template>
             </v-combobox>
             <v-btn @click="filterBankGists" block>FILTER</v-btn>
           </section>
@@ -206,11 +206,15 @@
       },
       submitRemoveTag() {
         this.tagUseArray.map(item => {
+          if(item.tags !== undefined){
           item.tags = item.tags.filter(tag => tag !== this.tagUseData)
+          }
         })
         this.tagUseArray.map(item => {
+          if(item.tags !== undefined){
           this.bank_gists = this.bank_gists.filter(gist => gist.id !== item.id)
           this.bank_gists.push(item)
+          }
         })
         this.tagUseData = ""
         this.tagUseArray = []
@@ -228,7 +232,7 @@
       },
       submitTagUse() {
         this.tagUseArray.map(item => {
-          if (item.tags) {
+          if (item.tags === undefined) {
             item.tags = []
             item.tags.push(this.tagUseData)
           } else {

@@ -1,7 +1,8 @@
 # code-bank
 
 > Ultimate storage and export of github gists.
-
+##KanBan Board:
+https://waffle.io/AlexanderCarlston/CODE-BANK
 ## Live Demo:
 [![work](https://imgur.com/TC2S2YB.png)](http://www.youtube.com/watch?v=uF7JXXSvz4o&t)
 
@@ -46,20 +47,3 @@ I believe in whatever "end" I'm working on, I'll always be a full stack develope
 ![User flow](https://i.imgur.com/NEf3oHw.png)
 <br />Through the user flow I was able to see what functionality I would need from my API. I used a user functionality table to figure out how many tables I would actually need, the json column in postgreSQL is amazing:
 ![ERD](https://i.imgur.com/uZK3emL.png)
-
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```

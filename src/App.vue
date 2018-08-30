@@ -4,7 +4,7 @@
       <v-list>
         <v-toolbar flat class="transparent">
           <v-list>
-            <v-list-tile avatar>
+            <v-list-tile class="title">
               <v-list-tile-avatar>
                 <img :src="User.avatar_url">
               </v-list-tile-avatar>
@@ -46,16 +46,16 @@
       <v-toolbar-items>
         <v-btn flat @click="home">Home
         </v-btn>
-        <v-btn flat>EXAMPLE</v-btn>
+        <v-btn :to='{name: "Example"}' flat>EXAMPLE</v-btn>
         <v-btn flat href="https://github.com/AlexanderCarlston/CODE-BANK" target="_blank">Github
         </v-btn>
-        <v-btn v-if="!loggedIn" flat large @click="authenticate('github')">Sign in
+        <v-btn v-if="!loggedIn" class="hidden-sm-and-down" flat large @click="authenticate('github')">Sign in
           <i class="devicon-github-plain"></i>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <Modal v-if="logIn" :logIn="logIn" :userGists="userGists" :boolean="true"/>
-    <router-view></router-view>
+    <router-view v-else></router-view>
   </v-app>
 </template>
 
@@ -107,6 +107,9 @@
       authenticate(provider) {
         this.$auth.authenticate(provider).then(data => {
           // Execute application logic after successful social authentication
+          if(data.data.token === undefined){
+            console.log("Login failed")
+          } else {
           store.dispatch("changeUser", {
             property: "access_token",
             value: data.data.token
@@ -143,6 +146,7 @@
               });
             }
           }, 1000);
+          }
         });
       }
     }
