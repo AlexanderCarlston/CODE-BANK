@@ -19,7 +19,13 @@ This project started as my capstone for Galvanize, an end of program project whe
 Currently I'm planning out my app, I've come to realize planning is the key to success. I'm doing this my creating wireframes, and ERDS. I'm also making sure that the general foundation of this application is expandable, so I can make any changes that I need to.
 * Navbar wireframe:
 ![Navbar](https://imgur.com/haHo7rQ.png)
-* How to page wireframe:
+* Example page wireframe:
+For the example page I need to consider what the user needs from this page:
+* Introduction to what each page does
+* Explanation of user functionality
+* Explanation of how tags work
+* Explanation of how they all work together
+![Example Page]()
 
 
 ## Built With:
