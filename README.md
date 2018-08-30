@@ -27,8 +27,6 @@ For the example page I need to consider what the user needs from this page:
 * Explanation of how they all work together
 * Example page wireframe:
 ![Example Page](https://imgur.com/o2BNwKH.png)
-* Mobile Example Page:
-<br />
 ![Example Page Mobile](https://imgur.com/UukQIlM.png) 
 
 
