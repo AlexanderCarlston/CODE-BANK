@@ -30,7 +30,7 @@ Vue.use(VueAuthenticate, {
   providers: {
     github: {
       clientId: '8152cb35e38e71e9bbf3',
-      redirectUri: 'http://localhost:8080'
+      redirectUri: 'http://code-bank.surge.sh'
     }
   }})
 Vue.config.productionTip = false
