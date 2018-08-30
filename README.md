@@ -26,7 +26,7 @@ For the example page I need to consider what the user needs from this page:
 * Explanation of how tags work
 * Explanation of how they all work together
 * Example page wireframe:
-![Example Page]()
+![Example Page](https://imgur.com/o2BNwKH.png)
 
 
 ## Built With:
