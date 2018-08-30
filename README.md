@@ -20,6 +20,7 @@ Currently I'm planning out my app, I've come to realize planning is the key to s
 * Navbar wireframe:
 ![Navbar](https://imgur.com/haHo7rQ.png)
 * Example page wireframe:
+<br />
 For the example page I need to consider what the user needs from this page:
 * Introduction to what each page does
 * Explanation of user functionality
