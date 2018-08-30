@@ -2,8 +2,7 @@
 
 > Ultimate storage and export of github gists.
 
-##KanBan Board:
-https://waffle.io/AlexanderCarlston/CODE-BANK
+KanBan Board: https://waffle.io/AlexanderCarlston/CODE-BANK
 ## Live Demo:
 [![work](https://imgur.com/TC2S2YB.png)](http://www.youtube.com/watch?v=uF7JXXSvz4o&t)
 
