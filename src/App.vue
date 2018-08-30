@@ -46,7 +46,7 @@
       <v-toolbar-items>
         <v-btn flat @click="home">Home
         </v-btn>
-        <v-btn :to='{name: "Example"}' flat>EXAMPLE</v-btn>
+        <v-btn :to='{name: "Example"}' disabled flat>EXAMPLE</v-btn>
         <v-btn flat href="https://github.com/AlexanderCarlston/CODE-BANK" target="_blank">Github
         </v-btn>
         <v-btn v-if="!loggedIn" class="hidden-sm-and-down" flat large @click="authenticate('github')">Sign in
