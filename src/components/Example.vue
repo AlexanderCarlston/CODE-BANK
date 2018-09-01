@@ -2,13 +2,15 @@
   <v-content>
     <v-container>
       <section>
+        <v-flex xs12 sm6>
         <v-card>
           <v-card-title primary-title>
             <div>
-              <div class="headline">Top western road trips</div>
+              <div class="headline">CODE-BANK</div>
             </div>
           </v-card-title>
         </v-card>
+        </v-flex>
       </section>
       <section>
         <v-layout>
