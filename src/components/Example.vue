@@ -72,14 +72,18 @@
             <v-flex v-if="tagUse">
               <v-select v-model="tagUseData" :items="items" label="tags">
               </v-select>
+              <v-layout>
               <v-checkbox v-for="(code, index) in bank_gists" :key="code.id+index" :v-model="index" :label="code.files[Object.keys(code.files)[0]].filename" @change="addBankGist(code, code.id)"></v-checkbox>
+              </v-layout>
               <v-btn @click="submitTagUse">Submit</v-btn>
             </v-flex>
   
             <v-flex v-if="removeTag">
               <v-select v-model="tagUseData" :items="items" label="tags">
               </v-select>
+              <v-layout>
               <v-checkbox v-for="(code, index) in bank_gists" :key="code.id+index" :v-model="index" :label="code.files[Object.keys(code.files)[0]].filename" @change="addBankGist(code, code.id)"></v-checkbox>
+              </v-layout>
               <v-btn @click="submitRemoveTag">Submit</v-btn>
             </v-flex>
           </v-flex>
