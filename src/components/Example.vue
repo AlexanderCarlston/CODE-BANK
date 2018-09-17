@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-content class="secondary">
     <Modal v-if="logIn" :logIn="logIn" :boolean="false" :tags="items" :closeLogIn="closeLogIn" />
     <v-container v-else>
       <v-layout row wrap>

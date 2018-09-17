@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-content class="secondary">
     <section>
       <v-layout column wrap class="my-5" align-center>
         <img src="static/bank.png" height="200">

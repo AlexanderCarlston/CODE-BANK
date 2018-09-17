@@ -1,5 +1,6 @@
 <template>
   <v-app>
+
     <v-navigation-drawer v-if="loggedIn" v-model="drawer" fixed app>
       <v-list>
         <v-toolbar flat class="transparent">
@@ -40,7 +41,8 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app>
+
+    <v-toolbar class="secondary" app>
       <v-toolbar-side-icon v-if="loggedIn" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -54,8 +56,10 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
+
     <Modal v-if="logIn" :logIn="logIn" :userGists="userGists" :boolean="true"/>
     <router-view v-else></router-view>
+    
   </v-app>
 </template>
 
