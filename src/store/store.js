@@ -10,6 +10,7 @@ Vue.use(VueAxios, axios)
 const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
   baseUrl: 'http://code-bank.surge.sh'
 })
+
 export default new Vuex.Store({
   state: {
     isAuthenticated: false,

@@ -134,10 +134,7 @@
 
 <script>
   export default {
-    name: "LandingPage",
-    mounted() {
-  
-    }
+    name: "LandingPage"
   };
 </script>
 

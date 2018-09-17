@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  import Modal from "./Modal.vue";
+  import Modal from "../components/Modal.vue";
   import VueEmbedGist from "vue-embed-gist";
   import store from "../store/store.js";
   export default {

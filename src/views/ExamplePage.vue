@@ -2,6 +2,7 @@
   <v-content class="secondary">
     <Modal v-if="logIn" :logIn="logIn" :boolean="false" :tags="items" :closeLogIn="closeLogIn" />
     <v-container v-else>
+
       <v-layout row wrap>
         <section>
           <v-layout>
@@ -90,7 +91,9 @@
         </section>
         <v-spacer></v-spacer>
       </v-layout>
+      
       <br>
+
       <v-layout>
         <section>
           <v-combobox v-model="chips" :items="items" label="filter" chips clearable prepend-icon="filter_list" solo multiple>
@@ -107,6 +110,7 @@
             <v-btn @click="filterBankGists" block>FILTER</v-btn>
           </section>
         </v-layout>
+
         <v-layout v-if="!filter" row wrap>  
           <vue-embed-gist 
           v-for="code in bank_gists" 
@@ -115,6 +119,7 @@
           :file="code.files[Object.keys(code.files)[0]].filename"
           />
         </v-layout>
+
         <v-layout v-else row wrap>
           <vue-embed-gist 
           v-for="code in filtered_gists" 
@@ -123,12 +128,13 @@
           :file="code.files[Object.keys(code.files)[0]].filename"
           />
         </v-layout>
+
     </v-container>
   </v-content>
 </template>
 
 <script>
-  import Modal from "./Modal.vue";
+  import Modal from "../components/Modal.vue";
   import VueEmbedGist from "vue-embed-gist";
   import store from "../store/store.js";
   export default {
@@ -298,48 +304,10 @@
           this.tagCreate = true
         }
       },
-      addVaultGist(obj, id) {
-        if (!this.vault_gists.filter(obj => obj.id === id)[0]) {
-          this.vault_gists.push(obj);
-        } else {
-          for (var i = 0; i < this.vault_gists.length; i++) {
-            var index = 0;
-            if (this.vault_gists[i].id === id) {
-              this.vault_gists.splice(i, 1);
-              return index;
-            }
-            return index;
-          }
-          this.bank_gists.splice(index, 1);
-        }
-      },
       remove(item) {
         this.chips.splice(this.chips.indexOf(item), 1)
         this.chips = [...this.chips]
       },
-      changeToForm() {
-        this.vaultForm = true;
-      },
-      postVault() {
-        fetch("https://secret-island-17002.herokuapp.com/vaults", {
-          method: "POST",
-          headers: new Headers({
-            "content-type": "application/json"
-          }),
-          body: JSON.stringify({
-            vault_name: this.vault_name,
-            user_id: this.userId,
-            vault_code_snippets: {
-              data: this.bank_gists,
-              tags: []
-            }
-          })
-        });
-        this.vaultForm = false;
-        this.$router.push({
-          name: "VaultLoading"
-        });
-      }
     }
   };
 </script>

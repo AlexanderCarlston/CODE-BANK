@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LandingPage from '@/components/LandingPage.vue'
-import Bank from '@/components/Bank.vue'
-import Vaults from '@/components/Vaults.vue'
-import Example from '@/components/Example.vue'
+import LandingPage from '@/views/LandingPage.vue'
+import Bank from '@/views/UserBank.vue'
+import Vault from '@/views/UserVault.vue'
+import Example from '@/views/ExamplePage.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -19,9 +19,9 @@ export default new Router({
       component: Bank
     },
     {
-      path: '/vaults',
-      name: 'Vaults',
-      component: Vaults
+      path: '/vault',
+      name: 'Vault',
+      component: Vault
     },
     {
       path: 'example',

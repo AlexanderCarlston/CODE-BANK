@@ -105,7 +105,7 @@
 
 <script>
 	import store from "../store/store.js"
-	import Modal from "./Modal.vue";
+  import Modal from "../components/Modal.vue";
 	import VueEmbedGist from 'vue-embed-gist'
 	export default {
 		name: "Vaults",
