@@ -78,7 +78,7 @@
 	                  >
 	                  <strong>{{ data.item }}</strong>&nbsp;
 	                  </v-chip>
-</template>
+            </template>
             </v-combobox>
             <v-btn disabled>FILTER</v-btn>
           </section>

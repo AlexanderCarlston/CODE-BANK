@@ -1,6 +1,5 @@
 <template>
   <v-app>
-
     <v-navigation-drawer v-if="loggedIn" v-model="drawer" fixed app>
       <v-list>
         <v-toolbar flat class="transparent">
