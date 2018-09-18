@@ -158,7 +158,20 @@
         chips: [],
         items: [],
         logIn: false,
-        tag: tags.state
+        tag: '',
+        tagRules: [
+          v => !!v || 'Name is required',
+          v => v.length <= 10 || 'Name must be less than 10 characters'
+        ],
+        tagCreate: false,
+        tagDelete: false,
+        tagDeleteData: "",
+        tagUse: false,
+        tagUseData: "",
+        tagUseArray: [],
+        removeTag: false,
+        removeTagData: "",
+        removeTagArray: {}
       };
     },
     mounted() {
