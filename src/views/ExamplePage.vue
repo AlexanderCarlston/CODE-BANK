@@ -137,6 +137,7 @@
   import Modal from "../components/Modal.vue";
   import VueEmbedGist from "vue-embed-gist";
   import store from "../store/store.js";
+  import tags from "../utils/tags"
   export default {
     name: "Example",
     props: ["closeForm"],
@@ -157,23 +158,11 @@
         chips: [],
         items: [],
         logIn: false,
-        tag: '',
-        tagRules: [
-          v => !!v || 'Name is required',
-          v => v.length <= 10 || 'Name must be less than 10 characters'
-        ],
-        tagCreate: false,
-        tagDelete: false,
-        tagDeleteData: "",
-        tagUse: false,
-        tagUseData: "",
-        tagUseArray: [],
-        removeTag: false,
-        removeTagData: "",
-        removeTagArray: {}
+        tag: tags.state
       };
     },
     mounted() {
+      console.log(test)
       fetch("https://secret-island-17002.herokuapp.com/users/3")
       .then(response => {
         return response.json();
@@ -187,9 +176,7 @@
 
     },
     methods: {
-      importButton() {
-        this.logIn = true
-      },
+
       filterBankGists() {
         if (this.chips.length === 0) {
           this.filter = false
