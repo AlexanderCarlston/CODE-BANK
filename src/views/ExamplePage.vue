@@ -185,9 +185,6 @@
         this.bank_gists = data.userItem.user_code_snippets.data
       })
     },
-    computed: {
-
-    },
     methods: {
 
       filterBankGists() {
